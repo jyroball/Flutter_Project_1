@@ -20,7 +20,7 @@ class StartScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.primary,
                   width: 4,
                 ),
               ),
@@ -38,13 +38,12 @@ class StartScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
                   ),
                 ),
                 SizedBox(height: 8),
                 Text(
                   'Software Engineer',
-                  style: TextStyle(fontSize: 18, color: Colors.white70),
+                  style: TextStyle(fontSize: 18),
                 ),
               ],
             ),

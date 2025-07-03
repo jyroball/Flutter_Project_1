@@ -21,7 +21,7 @@ class BioScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.primary,
                       width: 4,
                     ),
                   ),
@@ -43,7 +43,7 @@ class BioScreen extends StatelessWidget {
                     ),
                     Text(
                       'Software Engineer',
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                      style: TextStyle(fontSize: 16),
                     ),
                   ],
                 ),

@@ -43,22 +43,9 @@ class _ProfileState extends State<Profile> {
     //change screeen when re rendered
     activeScreen = isStart ? StartScreen(switchScreen) : BioScreen(switchScreen);
 
-    return MaterialApp(
-      home: Scaffold(
-        body: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                 Color.fromARGB(255, 76, 8, 159),
-                 Color.fromARGB(255, 111, 18, 252)
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight
-              ),
-            ),
-          child: activeScreen,
-        ),
-      ),
+    //change to just returning screen since we have theme to control design now
+    return Scaffold(
+      body: activeScreen,
     );
   }
 }
