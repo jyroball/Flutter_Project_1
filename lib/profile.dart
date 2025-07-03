@@ -18,7 +18,9 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   //nullable widget for now when intializing
   Widget? activeScreen;
-  List<String> selectedAnswers = [];
+
+  //boolean to know what screen we should be in
+  bool isStart = true;
 
   //Starts an initialization logic when objects are created
   @override
@@ -31,12 +33,16 @@ class _ProfileState extends State<Profile> {
   //Switch between bio nad more information
   void switchScreen() {
     setState(() {
-      activeScreen = BioScreen(switchScreen);
+      //toggle boolean when button poreesesd
+      isStart = !isStart;
     });
   }
 
   @override
   Widget build(context) {
+    //change screeen when re rendered
+    activeScreen = isStart ? StartScreen(switchScreen) : BioScreen(switchScreen);
+
     return MaterialApp(
       home: Scaffold(
         body: Container(

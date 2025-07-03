@@ -1,46 +1,69 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class StartScreen extends StatelessWidget {
-  const StartScreen(this.startScreen, {super.key}); //pass a void function from quiz.dart
+  const StartScreen(this.next, {super.key}); //pass a void function from quiz.dart
 
-  final void Function() startScreen;
+  final void Function() next;
 
-  @override
-  Widget build(context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Image.asset(
-            'assets/images/quiz-logo.png',  //Change to photo of myself Later
-            width: 300,
-            color: const Color.fromARGB(175, 255, 255, 255),
-          ),
-          const SizedBox(
-            height: 80,
-          ),
-          Text(
-            'Jyro Jimenez',
-            style: GoogleFonts.lato(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ), 
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          //Use this button to change screen to bio
-          OutlinedButton.icon(
-            onPressed: startScreen,
-            style: OutlinedButton.styleFrom(
-              foregroundColor: Colors.white,
+  @override 
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const Spacer(),
+            //profile pic with border
+            Container(
+              padding: const EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Colors.white,
+                  width: 4,
+                ),
+              ),
+              child: const CircleAvatar(
+                radius: 80,
+                backgroundImage: AssetImage('assets/images/profile.jpg'),
+              ),
             ),
-            icon: const Icon(Icons.arrow_forward_ios_rounded),
-            label: const Text('More Info...'),
-          ),
-        ],
+
+            //name and posiution
+            const Column(
+              children: [
+                Text(
+                  'Jyro Jimenez',
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Software Engineer',
+                  style: TextStyle(fontSize: 18, color: Colors.white70),
+                ),
+              ],
+            ),
+
+            const Spacer(),
+
+            //button for details page
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: next,
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                ),
+                child: const Text('Details'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
