@@ -55,19 +55,22 @@ class BioScreen extends StatelessWidget {
               const SizedBox(height: 30),
 
               //General Information
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                elevation: 6,
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Text(
-                    'Birth Date: ${user.formattedDate}\n'
-                    'Age: ${user.age}\n'
-                    'Email: ${user.email}',
-                    textAlign: TextAlign.left,
-                    style: const TextStyle(fontSize: 16),
+              SizedBox(
+                width: double.infinity,
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  elevation: 6,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Text(
+                      'Birth Date: ${user.formattedDate}\n'
+                      'Age: ${user.age}\n'
+                      'Email: ${user.email}',
+                      textAlign: TextAlign.left,
+                      style: const TextStyle(fontSize: 16),
+                    ),
                   ),
                 ),
               ),
@@ -75,20 +78,23 @@ class BioScreen extends StatelessWidget {
               const SizedBox(height: 30),
 
               //biographtuy
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                elevation: 6,
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Text(
-                    user.bio,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 16),
+              SizedBox(
+                width: double.infinity,
+                child:Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  elevation: 6,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Text(
+                      user.bio,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 16),
+                    ),
                   ),
                 ),
-              ),
+              )
             ],
           ),
         ),
