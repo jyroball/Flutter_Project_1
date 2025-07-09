@@ -2,9 +2,10 @@ import 'package:test1/models/user.dart';
 import 'package:flutter/material.dart';
 
 class UserCard extends StatelessWidget {
-  const UserCard({super.key, required this.user});
+  const UserCard({super.key, required this.goBio, required this.user});
 
   final User user;
+  final VoidCallback goBio;
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +48,10 @@ class UserCard extends StatelessWidget {
             ),
 
             //Floating button for viewing user aligned at the end
-
-
-            
+            IconButton(
+              icon: const Icon(Icons.remove_red_eye),
+              onPressed: goBio,
+            ),
           ],
         ),
       ),
