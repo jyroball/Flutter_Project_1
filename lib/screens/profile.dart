@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 //Different screens for bio
-import 'package:test1/start_screen.dart';
-import 'package:test1/bio_screen.dart';
+import 'package:test1/screens/start_screen.dart';
+import 'package:test1/screens/bio_screen.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
