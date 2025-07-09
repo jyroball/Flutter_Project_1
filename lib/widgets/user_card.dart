@@ -20,23 +20,36 @@ class UserCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(expense.title, style: Theme.of(context).textTheme.titleMedium),
-            const SizedBox(height: 4,),
-            Row(
-              children: [
-                //toStringAsFixed outputs a fixed amount of float values (2 Decimal places)
-                Text('\$${expense.amount.toStringAsFixed(2)}'),
-                const Spacer(),
-                //adding another row into row pushes the next values to the right half
-                Row(
-                  children: [
-                    Icon(categoryIcon[expense.category]),
-                    const SizedBox(width: 8,),
-                    Text(expense.formattedDate),
-                  ],
+            //Profile picture
+            Container(
+              padding: const EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.primary,
+                  width: 4,
                 ),
+              ),
+              child: const CircleAvatar(
+                radius: 30,
+                backgroundImage: AssetImage('assets/images/blank.png'),
+              ),
+            ),
+            
+            //Name and Occupation
+            Column(
+              children: [
+                //first then last name
+                Text('${user.firstName} ${user.lastName}', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                //occupation below name
+                Text(user.occupation, style: const TextStyle(fontSize: 16)),
               ],
             ),
+
+            //Floating button for viewing user aligned at the end
+
+
+            
           ],
         ),
       ),
