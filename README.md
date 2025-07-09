@@ -1,12 +1,15 @@
-# test1
-
-A new Flutter project.
-
-## Getting Started
+# Biography Flutter application
 
 This project is a Biography application made in flutter.
 
-flutter version with fvm is 3.27.0
+## Getting Started:
 
-Run with: fvm flutter run
+This project is a Biography application made in flutter.
 
+flutter version using fvm
+    
+    fvm flutter 3.32.5
+
+Run with: 
+
+    fvm flutter run
