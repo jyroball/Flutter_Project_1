@@ -1,9 +1,9 @@
 //package to get unique id parameters like a GUID value
 //import 'package:flutter/material.dart';
-// import 'package:uuid/uuid.dart';
-// import 'package:intl/intl.dart';
+//import 'package:uuid/uuid.dart';
+import 'package:intl/intl.dart';
 
-//final formatter = DateFormat.yMd();
+final formatter = DateFormat.yMd();
 
 //utility object to generate a unique id
 //const uuid = Uuid();
@@ -15,6 +15,7 @@ class User {
   final int age;
   final String occupation;
   final String bio;
+  final String email;
   final String imagePath;
 
   User({
@@ -24,10 +25,11 @@ class User {
     required this.age,
     required this.occupation,
     required this.bio,
+    required this.email,
     required this.imagePath, //Might hardcode path for now
   });
 
-  // String get formattedDate {
-  //   return formatter.format(birth_date);
-  // }
+  String get formattedDate {
+    return formatter.format(birthDate);
+  }
 }
