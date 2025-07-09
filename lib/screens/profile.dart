@@ -29,6 +29,7 @@ class _ProfileState extends State<Profile> {
       occupation: 'Software Developer', 
       bio: 'I am a firmware developer from University of California, Riverside. I am currently studying flutter to get better at mobile development and have more experience under my tool box.', 
       email: 'jyrojimenez@gmail.com',
+      password: 'test12345!',
       imagePath: 'assets/images/profile.jpg'
     ),
     User(
@@ -39,6 +40,7 @@ class _ProfileState extends State<Profile> {
       occupation: 'Software Developer', 
       bio: 'I am a Software Developer created to be a random person for a flutter project.', 
       email: 'johndoe@gmail.com',
+      password: 'test12345!',
       imagePath: 'assets/images/blank.png'
     ),
   ];
