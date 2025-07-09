@@ -47,6 +47,8 @@ class _ProfileState extends State<Profile> {
   //  NEED TO MAKE A ADD USER FORM LATER
   //
 
+  //I need an init state later when I connect to a DB to read from it, since data is hard coded rn should be fine
+
   //Using user card button view profile
   void _viewBio(User user) {
     Navigator.push(
