@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+//import model
+import 'package:test1/models/user.dart';
 
 class BioScreen extends StatelessWidget {
-  const BioScreen(this.back, {super.key}); //pass a void function from quiz.dart
-
-  final void Function() back;
+  //we start using navigator to change screens instead of just changing screens
+  const BioScreen({required this.user, super.key}); //pass a void function from quiz.dart
+  final User user;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Padding(
+      child: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
@@ -34,20 +36,36 @@ class BioScreen extends StatelessWidget {
                 const SizedBox(width: 16),
 
                 //column for name and position
-                const Column(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Jyro Jimenez',
-                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      'Software Engineer',
-                      style: TextStyle(fontSize: 16),
-                    ),
+                    //first then last name
+                    Text('${user.firstName} ${user.lastName}', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                    //occupation below name
+                    Text(user.occupation, style: const TextStyle(fontSize: 16)),
                   ],
                 ),
               ],
+            ),
+
+            const SizedBox(height: 30),
+
+            //General Information
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              elevation: 6,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text(
+                  'Birth Date: ${user.formattedDate}\n'
+                  'Age: ${user.age}\n'
+                  'Email: ${user.email}',
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(fontSize: 16),
+                ),
+              ),
             ),
 
             const SizedBox(height: 30),
@@ -58,29 +76,23 @@ class BioScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
               elevation: 6,
-              child: const Padding(
-                padding: EdgeInsets.all(20),
+              child: Padding(
+                padding: const EdgeInsets.all(20),
                 child: Text(
-                  'I am a firmware developer from University of California, Riverside. I am currently studying flutter to get better at mobile development and have more experience under my tool box.',
+                  user.bio,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 ),
               ),
             ),
 
             const Spacer(),
 
-            //button to go back
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                onPressed: back,
-                icon: const Icon(Icons.arrow_back),
-                label: const Text('Back to Start'),
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                ),
-              ),
+            //button to go back using navigator instead
+            ElevatedButton.icon(
+              onPressed: () => Navigator.pop(context),
+              icon: const Icon(Icons.arrow_back),
+              label: const Text('Back'),
             ),
           ],
         ),
