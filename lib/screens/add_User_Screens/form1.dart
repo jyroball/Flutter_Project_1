@@ -31,51 +31,56 @@ class Step1Form extends StatelessWidget {
     return Form(
       key: formKey,
       child: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              //Output instructions at the top
-              const SizedBox(height: 8),
-              const Text("Personal Information", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              const Text("Input your personal information. All fields are required.",
-                  style: TextStyle(color: Colors.grey)),
+        child: Column(
+          children: [
 
-              //Output First name Input box
-              const SizedBox(height: 16),
-              TextFormField(
-                decoration: const InputDecoration(labelText: 'First Name'),
-                validator: (val) => val == null || val.isEmpty ? 'First Name is required' : null,
-                onSaved: (val) => newFirstName(val!),
+            //Text Form Inputs
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //Output instructions at the top
+                    const SizedBox(height: 8),
+                    const Text("Personal Information", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    const Text("Input your personal information. All fields are required.",
+                        style: TextStyle(color: Colors.grey)),
+              
+                    //Output First name Input box
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      decoration: const InputDecoration(labelText: 'First Name'),
+                      validator: (val) => val == null || val.isEmpty ? 'First Name is required' : null,
+                      onSaved: (val) => newFirstName(val!),
+                    ),
+              
+                    //Output Last name input box
+                    const SizedBox(height: 12),
+                    TextFormField(
+                      decoration: const InputDecoration(labelText: 'Last Name'),
+                      validator: (val) => val == null || val.isEmpty ? 'Last Name is required' : null,
+                      onSaved: (val) => newLastName(val!),
+                    ),
+                    
+                    const SizedBox(height: 12),
+                  ],
+                ),
               ),
+            ),
 
-              //Output Last name input box
-              const SizedBox(height: 12),
-              TextFormField(
-                decoration: const InputDecoration(labelText: 'Last Name'),
-                validator: (val) => val == null || val.isEmpty ? 'Last Name is required' : null,
-                onSaved: (val) => newLastName(val!),
-              ),
-              const SizedBox(height: 12),
-        
-              //Next Button
-              SizedBox(
+            //Next Button
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+              child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: next,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
                   child: const Text("Next", style: TextStyle(fontSize: 16)),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
