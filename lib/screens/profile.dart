@@ -6,6 +6,8 @@ import 'package:test1/screens/bio_screen.dart';
 import 'package:test1/models/user.dart';
 //import reusable widghets
 import 'package:test1/widgets/user_card.dart';
+//date time
+import 'package:intl/intl.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -17,8 +19,29 @@ class Profile extends StatefulWidget {
 
 // "_" means that class is a private class for the file
 class _ProfileState extends State<Profile> {
-  //have an array for the list of users
-  final List<User> users = [];
+  //have an array for the list of users (for now add an initial user as me and random so we can see output)
+  final List<User> users = [
+    User(
+      firstName: 'Jyro', 
+      lastName: 'Jimenez', 
+      birthDate: DateFormat('MM/dd/yyyy').parse('11/24/2001'),
+      age: 23,
+      occupation: 'Software Developer', 
+      bio: 'I am a firmware developer from University of California, Riverside. I am currently studying flutter to get better at mobile development and have more experience under my tool box.', 
+      email: 'jyrojimenez@gmail.com',
+      imagePath: 'assets/images/profile.jpg'
+    ),
+    User(
+      firstName: 'John', 
+      lastName: 'Jones', 
+      birthDate: DateFormat('MM/dd/yyyy').parse('1/1/2000'),
+      age: 24,
+      occupation: 'Software Developer', 
+      bio: 'I am a Software Developer created to be a random person for a flutter project.', 
+      email: 'johndoe@gmail.com',
+      imagePath: 'assets/images/blank.png'
+    ),
+  ];
 
   //
   //  NEED TO MAKE A ADD USER FORM LATER
