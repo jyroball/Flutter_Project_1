@@ -65,31 +65,54 @@ class Step1Form extends StatelessWidget {
                     
                     //Output Birthdate picker and Get Age
                     const SizedBox(height: 12),
-                    TextFormField(
-                      readOnly: true,
-                      decoration: const InputDecoration(labelText: 'Birthdate'),
-                      controller: TextEditingController(
-                        text: newBirthdate != null
-                            ? '${newBirthdate!.month.toString().padLeft(2, '0')}/${newBirthdate!.day.toString().padLeft(2, '0')}/${newBirthdate!.year}'
-                            : '',
-                      ),
-                      //show calendar to pick date
-                      onTap: () async {
-                        final picked = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(1925),
-                          lastDate: DateTime.now(),
-                        );
-                        if (picked != null) {
-                          newBirthDateCall(picked);
-                        }
-                      },
-                      validator: (_) => newBirthdate == null ? 'Birthdate is required' : null,
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: TextFormField(
+                            readOnly: true,
+                            decoration: const InputDecoration(labelText: 'Birthdate'),
+                            controller: TextEditingController(
+                              text: newBirthdate != null
+                                  ? '${newBirthdate!.month.toString().padLeft(2, '0')}/${newBirthdate!.day.toString().padLeft(2, '0')}/${newBirthdate!.year}'
+                                  : '',
+                            ),
+                            //show calendar to pick date
+                            onTap: () async {
+                              final picked = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(1925),
+                                lastDate: DateTime.now(),
+                              );
+                              if (picked != null) {
+                                newBirthDateCall(picked);
+                              }
+                            },
+                            validator: (_) => newBirthdate == null ? 'Birthdate is required' : null,
+                          ),
+                        ),
+
+                        const SizedBox(width: 12),
+
+                        Expanded(
+                          flex: 1,
+                          child: TextFormField(
+                            readOnly: true,
+                            decoration: const InputDecoration(labelText: 'Age'),
+                            controller: TextEditingController(text: newAge.toString()),
+                          ),
+                        ),
+                      ],
                     ),
 
+                    //Output Bio Input
                     const SizedBox(height: 12),
-                    Text("Age: $newAge"),
+                    TextFormField(
+                      decoration: const InputDecoration(labelText: 'Bio - Describe yourself'),
+                      validator: (val) => val == null || val.isEmpty ? 'Biography is required' : null,
+                      onSaved: (val) => newBio(val!),
+                    ),
                     
                   ],
                 ),
