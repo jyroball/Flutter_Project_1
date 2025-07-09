@@ -25,9 +25,9 @@ class UserCard extends StatelessWidget {
               width: 4,
             ),
           ),
-          child: const CircleAvatar(
+          child: CircleAvatar(
             radius: 30,
-            backgroundImage: AssetImage('assets/images/blank.png'),
+            backgroundImage: AssetImage(user.imagePath),
           ),
         ),
         //name
