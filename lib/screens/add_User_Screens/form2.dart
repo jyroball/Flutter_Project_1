@@ -9,7 +9,9 @@ class Step2Form  extends StatelessWidget {
 
   //local variabel
   final bool showPassword;
-  final VoidCallback togglePasswordVisibility;
+  final bool showConfirmPassword;
+  final VoidCallback togglePassword;
+  final VoidCallback toggleConfirmPassword;
   final String password;
 
   //navigation varioables
@@ -24,7 +26,9 @@ class Step2Form  extends StatelessWidget {
     required this.newPassword,
     required this.newPasswordConfirm,
     required this.showPassword,
-    required this.togglePasswordVisibility,
+    required this.showConfirmPassword,
+    required this.togglePassword,
+    required this.toggleConfirmPassword,
     required this.password,
     required this.next,
     required this.back,
@@ -75,72 +79,35 @@ class Step2Form  extends StatelessWidget {
                       onSaved: (val) => newEmail(val!),
                     ),
               
-                    //Output Last name input box
-                    const SizedBox(height: 12),
+                    //Output Password input biox
                     TextFormField(
-                      decoration: const InputDecoration(labelText: 'Last Name'),
-                      validator: (val) => val == null || val.isEmpty ? 'Last Name is required' : null,
-                      onSaved: (val) => newLastName(val!),
-                    ),
-                    
-                    //Output Birthdate picker and Get Age
-                    const SizedBox(height: 12),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: TextFormField(
-                            readOnly: true,
-                            decoration: const InputDecoration(labelText: 'Birthdate'),
-                            controller: TextEditingController(
-                              text: newBirthdate != null
-                                  ? '${newBirthdate!.month.toString().padLeft(2, '0')}/${newBirthdate!.day.toString().padLeft(2, '0')}/${newBirthdate!.year}'
-                                  : '',
-                            ),
-                            //show calendar to pick date
-                            onTap: () async {
-                              final picked = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(1925),
-                                lastDate: DateTime.now(),
-                              );
-                              if (picked != null) {
-                                newBirthDateCall(picked);
-                              }
-                            },
-                            validator: (_) => newBirthdate == null ? 'Birthdate is required' : null,
-                          ),
+                      //obscure text if show password or not
+                      obscureText: !showPassword,
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        hintText: 'Needs to be more than 8 characters with at least 1 special character and 1 number.',
+                        suffixIcon: IconButton(
+                          icon: Icon(showPassword ? Icons.visibility : Icons.visibility_off),
+                          onPressed: togglePassword,
                         ),
-
-                        const SizedBox(width: 12),
-
-                        Expanded(
-                          flex: 1,
-                          child: TextFormField(
-                            readOnly: true,
-                            decoration: const InputDecoration(labelText: 'Age'),
-                            controller: TextEditingController(text: newAge.toString()),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    //Output Occupation Input
-                    const SizedBox(height: 12),
-                    TextFormField(
-                      decoration: const InputDecoration(labelText: 'Occupation'),
-                      validator: (val) => val == null || val.isEmpty ? 'Occupation is required' : null,
-                      onSaved: (val) => newOccuputaion(val!),
-                    ),
-
-                    //Output Bio Input
-                    const SizedBox(height: 12),
-                    TextFormField(
-                      decoration: const InputDecoration(labelText: 'Bio - Describe yourself'),
-                      maxLines: 5,
-                      validator: (val) => val == null || val.isEmpty ? 'Biography is required' : null,
-                      onSaved: (val) => newBio(val!),
+                      ),
+                      validator: (val) {
+                        //make sure there's an entry
+                        if (val == null || val.isEmpty) {
+                          return 'Password is required';
+                        }
+                        //have a regex to make sure input has at least one special character, at least one number and length is > 8
+                        //(?=.*[0-9]) - at least one number
+                        //(?=.*[~!@#$%&*]) - at least one spceial character
+                        //[a-zA-Z0-9~!@#\$%&*] - characters allowed
+                        final regex = RegExp(r'^(?=.*[0-9])(?=.*[~!@#$%&*])[a-zA-Z0-9~!@#\$%&*]{8,}$');
+                        if (!regex.hasMatch(val)) {
+                          return 'Enter a valid password';
+                        }
+                        //valid so return niull
+                        return null;
+                      },
+                      onChanged: newPassword,
                     ),
                     
                   ],
