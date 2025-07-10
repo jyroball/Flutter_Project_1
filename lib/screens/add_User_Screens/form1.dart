@@ -106,10 +106,19 @@ class Step1Form extends StatelessWidget {
                       ],
                     ),
 
+                    //Output Occupation Input
+                    const SizedBox(height: 12),
+                    TextFormField(
+                      decoration: const InputDecoration(labelText: 'Occupation'),
+                      validator: (val) => val == null || val.isEmpty ? 'Occupation is required' : null,
+                      onSaved: (val) => newOccuputaion(val!),
+                    ),
+
                     //Output Bio Input
                     const SizedBox(height: 12),
                     TextFormField(
                       decoration: const InputDecoration(labelText: 'Bio - Describe yourself'),
+                      maxLines: 5,
                       validator: (val) => val == null || val.isEmpty ? 'Biography is required' : null,
                       onSaved: (val) => newBio(val!),
                     ),
