@@ -16,8 +16,9 @@ import 'package:test1/widgets/user_card.dart';
 //Import Form pages
 import 'package:test1/screens/add_user.dart';
 
-//Import for File
+//Import for File I/O
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/services.dart' show rootBundle;
 
 class Profile extends StatefulWidget {
@@ -71,7 +72,7 @@ class _ProfileState extends State<Profile> {
   Future<void> _loadItems() async {
     try {
       final contents = await rootBundle.loadString('assets/data/user.json');
-      final List<dynamic> jsonList = jsonDecode(contents);
+      final List jsonList = jsonDecode(contents);
       setState(() {
         users = jsonList.map((e) => User.fromJson(e)).toList();
       });
@@ -108,7 +109,7 @@ class _ProfileState extends State<Profile> {
                 setState(() {
                   users.add(newUser);
                   //Can add New User To JSON File Here too
-                  
+
                 });
               }
             },
