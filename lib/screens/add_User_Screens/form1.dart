@@ -10,9 +10,11 @@ class Step1Form extends StatelessWidget {
   final Function(DateTime) newBirthDateCall;
   final Function(String) newOccuputaion;
   final Function(String) newBio;
+
+  //naviagtion variables
   final VoidCallback next;
 
-  //
+  //passed vars
   const Step1Form({
     super.key,
     required this.formKey,
@@ -42,6 +44,7 @@ class Step1Form extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     //Output instructions at the top
+                    const Text("1 out of 3", style: TextStyle(color: Colors.grey)),
                     const SizedBox(height: 8),
                     const Text("Personal Information", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                     const Text("Input your personal information. All fields are required.",
