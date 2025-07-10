@@ -53,7 +53,10 @@ class Step1Form extends StatelessWidget {
                     //Output First name Input box
                     const SizedBox(height: 16),
                     TextFormField(
-                      decoration: const InputDecoration(labelText: 'First Name'),
+                      decoration: const InputDecoration(
+                        labelText: 'First Name',
+                        hintText: 'John',
+                      ),
                       validator: (val) => val == null || val.isEmpty ? 'First Name is required' : null,
                       onSaved: (val) => newFirstName(val!),
                     ),
@@ -61,7 +64,10 @@ class Step1Form extends StatelessWidget {
                     //Output Last name input box
                     const SizedBox(height: 12),
                     TextFormField(
-                      decoration: const InputDecoration(labelText: 'Last Name'),
+                      decoration: const InputDecoration(
+                        labelText: 'Last Name',
+                        hintText: 'Doe',
+                      ),
                       validator: (val) => val == null || val.isEmpty ? 'Last Name is required' : null,
                       onSaved: (val) => newLastName(val!),
                     ),
@@ -112,7 +118,10 @@ class Step1Form extends StatelessWidget {
                     //Output Occupation Input
                     const SizedBox(height: 12),
                     TextFormField(
-                      decoration: const InputDecoration(labelText: 'Occupation'),
+                      decoration: const InputDecoration(
+                        labelText: 'Occupation',
+                        hintText: 'Job Title',
+                      ),
                       validator: (val) => val == null || val.isEmpty ? 'Occupation is required' : null,
                       onSaved: (val) => newOccuputaion(val!),
                     ),
@@ -120,7 +129,10 @@ class Step1Form extends StatelessWidget {
                     //Output Bio Input
                     const SizedBox(height: 12),
                     TextFormField(
-                      decoration: const InputDecoration(labelText: 'Bio - Describe yourself'),
+                      decoration: const InputDecoration(
+                        labelText: 'Biography',
+                        hintText: 'Describe yourself, what do you do, who are you?',
+                      ),
                       maxLines: 5,
                       validator: (val) => val == null || val.isEmpty ? 'Biography is required' : null,
                       onSaved: (val) => newBio(val!),

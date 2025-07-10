@@ -59,7 +59,10 @@ class Step2Form  extends StatelessWidget {
                     //Output Email address input
                     const SizedBox(height: 16),
                     TextFormField(
-                      decoration: const InputDecoration(labelText: 'Email Address'),
+                      decoration: const InputDecoration(
+                        labelText: 'Email Address',
+                        hintText: 'john.doe@gmail.com',
+                      ),
                       //NEED TO VAIDATE FOR AN ACTUAL EMAIL
                       validator: (val) {
                         //make sure there's an entry
