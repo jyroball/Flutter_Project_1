@@ -1,29 +1,33 @@
 import 'package:flutter/material.dart';
 
-class Step1Form extends StatelessWidget {
+class Step2Form  extends StatelessWidget {
   //variables to send back to add_user page
   final GlobalKey<FormState> formKey;
-  final Function(String) newFirstName;
-  final Function(String) newLastName;
-  final DateTime? newBirthdate;
-  final int newAge;
-  final Function(DateTime) newBirthDateCall;
-  final Function(String) newOccuputaion;
-  final Function(String) newBio;
-  final VoidCallback next;
+  final Function(String) newEmail;
+  final Function(String) newPassword;
+  final Function(String) newPasswordConfirm;
 
-  //
-  const Step1Form({
+  //local variabel
+  final bool showPassword;
+  final VoidCallback togglePasswordVisibility;
+  final String password;
+
+  //navigation varioables
+  final VoidCallback next;
+  final VoidCallback back;
+
+  //passed avrs
+  const Step2Form ({
     super.key,
     required this.formKey,
-    required this.newFirstName,
-    required this.newLastName,
-    required this.newBirthdate,
-    required this.newAge,
-    required this.newBirthDateCall,
-    required this.newOccuputaion,
-    required this.newBio,
+    required this.newEmail,
+    required this.newPassword,
+    required this.newPasswordConfirm,
+    required this.showPassword,
+    required this.togglePasswordVisibility,
+    required this.password,
     required this.next,
+    required this.back,
   });
 
   @override
@@ -42,17 +46,33 @@ class Step1Form extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     //Output instructions at the top
+                    const Text("2 out of 3", style: TextStyle(color: Colors.grey)),
                     const SizedBox(height: 8),
-                    const Text("Personal Information", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                    const Text("Input your personal information. All fields are required.",
+                    const Text("Email & Password", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    const Text("Enter Login Information...",
                         style: TextStyle(color: Colors.grey)),
               
-                    //Output First name Input box
+                    //Output Email address input
                     const SizedBox(height: 16),
                     TextFormField(
-                      decoration: const InputDecoration(labelText: 'First Name'),
-                      validator: (val) => val == null || val.isEmpty ? 'First Name is required' : null,
-                      onSaved: (val) => newFirstName(val!),
+                      decoration: const InputDecoration(labelText: 'Email Address'),
+                      //NEED TO VAIDATE FOR AN ACTUAL EMAIL
+                      validator: (val) {
+                        //make sure there's an entry
+                        if (val == null || val.isEmpty) {
+                          return 'Email Address is required';
+                        }
+                        //make sure entry is an actual email
+                        final regex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                        if (!regex.hasMatch(val)) {
+                          return 'Enter a valid email address';
+                        }
+                        //valid so return niull
+                        return null;
+                      },
+                      //ALSO ADD EMAIL KEYBOARD TOO
+                      keyboardType: TextInputType.emailAddress,
+                      onSaved: (val) => newEmail(val!),
                     ),
               
                     //Output Last name input box
