@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 
 final formatter = DateFormat.yMd();
 
-class Step3Review extends StatelessWidget {
+class FormThree extends StatelessWidget {
   final String firstName;
   final String lastName;
   final DateTime birthDate;
@@ -14,7 +14,7 @@ class Step3Review extends StatelessWidget {
   final VoidCallback back;
   final VoidCallback submit;
 
-  const Step3Review({
+  const FormThree({
     super.key,
     required this.firstName,
     required this.lastName,

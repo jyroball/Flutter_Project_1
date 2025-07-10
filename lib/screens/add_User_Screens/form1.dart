@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Step1Form extends StatelessWidget {
+class FormOne extends StatelessWidget {
   //variables to send back to add_user page
   final GlobalKey<FormState> formKey;
   final Function(String) newFirstName;
@@ -15,7 +15,7 @@ class Step1Form extends StatelessWidget {
   final VoidCallback next;
 
   //passed vars
-  const Step1Form({
+  const FormOne({
     super.key,
     required this.formKey,
     required this.newFirstName,
