@@ -86,7 +86,7 @@ class Step2Form  extends StatelessWidget {
                       obscureText: !showPassword,
                       decoration: InputDecoration(
                         labelText: 'Password',
-                        hintText: 'Needs to be more than 8 characters with at least 1 special character and 1 number.',
+                        hintText: 'Minumum 8 Characters, 1 Special, 1 Digit',
                         suffixIcon: IconButton(
                           icon: Icon(showPassword ? Icons.visibility : Icons.visibility_off),
                           onPressed: togglePassword,
@@ -115,12 +115,12 @@ class Step2Form  extends StatelessWidget {
                     const SizedBox(height: 16),
                     TextFormField(
                       //obscure text if show password or not
-                      obscureText: !showPassword,
+                      obscureText: !showConfirmPassword,
                       decoration: InputDecoration(
                         labelText: 'Confirm Password',
                         hintText: 'Passwords must match',
                         suffixIcon: IconButton(
-                          icon: Icon(showPassword ? Icons.visibility : Icons.visibility_off),
+                          icon: Icon(showConfirmPassword ? Icons.visibility : Icons.visibility_off),
                           onPressed: toggleConfirmPassword,
                         ),
                       ),
@@ -129,17 +129,9 @@ class Step2Form  extends StatelessWidget {
                         if (val == null || val.isEmpty) {
                           return 'Password is required';
                         }
-                        //have a regex to make sure input has at least one special character, at least one number and length is > 8
-                        //(?=.*[0-9]) - at least one number
-                        //(?=.*[~!@#$%&*]) - at least one spceial character
-                        //[a-zA-Z0-9~!@#\$%&*] - characters allowed
-                        final regex = RegExp(r'^(?=.*[0-9])(?=.*[~!@#$%&*])[a-zA-Z0-9~!@#\$%&*]{8,}$');
-                        if (!regex.hasMatch(val)) {
-                          return 'Enter a valid password';
-                        }
                         //check if passwords match
-                        if (val == password) {
-                          return 'Enter a valid password';
+                        if (val != password) {
+                          return 'Passwords do not match';
                         }
                         //valid so return niull
                         return null;
