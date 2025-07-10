@@ -8,6 +8,8 @@ import 'package:test1/models/user.dart';
 import 'package:test1/widgets/user_card.dart';
 //date time
 import 'package:intl/intl.dart';
+//Import Form pages
+import 'package:test1/screens/add_user.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -45,10 +47,6 @@ class _ProfileState extends State<Profile> {
     ),
   ];
 
-  //
-  //  NEED TO MAKE A ADD USER FORM LATER
-  //
-
   //I need an init state later when I connect to a DB to read from it, since data is hard coded rn should be fine
 
   //Using user card button view profile
@@ -63,7 +61,27 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Users')),
+      appBar: AppBar(
+        title: const Text('Users'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            tooltip: 'Add User',
+            onPressed: () async {
+              final newUser = await Navigator.push<User>(
+                context,
+                MaterialPageRoute(builder: (_) => const AddUserScreen()),
+              );
+
+              if (newUser != null) {
+                setState(() {
+                  users.add(newUser);
+                });
+              }
+            },
+          ),
+        ],
+      ),
       body: ListView.builder(
         itemCount: users.length,
         //similar top old project, can prob add id to user card and make cards dismissable
