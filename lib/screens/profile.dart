@@ -20,6 +20,7 @@ import 'package:test1/screens/add_user.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:path_provider/path_provider.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -69,16 +70,40 @@ class _ProfileState extends State<Profile> {
   }
 
   //Load Items to call in INit
+  //Load items using path, but seems extra, just place holder for now till implement DB
   Future<void> _loadItems() async {
-    try {
-      final contents = await rootBundle.loadString('assets/data/user.json');
-      final List jsonList = jsonDecode(contents);
-      setState(() {
-        users = jsonList.map((e) => User.fromJson(e)).toList();
-      });
-    } catch (e) {
-      debugPrint('Error loading JSON: $e');
+    //get path file for json
+    final dir = await getApplicationDocumentsDirectory();
+    final file = File('${dir.path}/user.json');
+
+    //Use basic user.json if file does not exist yet
+    if (!await file.exists()) {
+      final assetData = await rootBundle.loadString('assets/data/user.json');
+      await file.writeAsString(assetData);
     }
+
+    //Deocde JSON file
+    final contents = await file.readAsString();
+    final List<dynamic> jsonList = jsonDecode(contents);
+
+    //Set local user variable to JSON contents to use in application
+    setState(() {
+      users = jsonList.map((e) => User.fromJson(e)).toList();
+    });
+  }
+
+  //Save user to JSON File
+  //Can probbaly make it better with deletes and insertions, but works for now
+  void _saveUsersJSON() async {
+    //Get file path
+    final dir = await getApplicationDocumentsDirectory();
+    final file = File('${dir.path}/user.json');
+
+    //Convert users data into json
+    final List<Map<String, dynamic>> userList = users.map((u) => u.toJson()).toList();
+
+    //Upload data into json
+    await file.writeAsString(jsonEncode(userList));
   }
 
   //Using user card button view profile
@@ -108,9 +133,9 @@ class _ProfileState extends State<Profile> {
               if (newUser != null) {
                 setState(() {
                   users.add(newUser);
-                  //Can add New User To JSON File Here too
-
                 });
+                //Can add New User To JSON File Here too
+                _saveUsersJSON();
               }
             },
           ),
