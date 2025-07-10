@@ -79,7 +79,8 @@ class Step2Form  extends StatelessWidget {
                       onSaved: (val) => newEmail(val!),
                     ),
               
-                    //Output Password input biox
+                    //Output Password input biox\
+                    const SizedBox(height: 16),
                     TextFormField(
                       //obscure text if show password or not
                       obscureText: !showPassword,
@@ -108,6 +109,42 @@ class Step2Form  extends StatelessWidget {
                         return null;
                       },
                       onChanged: newPassword,
+                    ),
+
+                    //Output Confirm Password input biox\
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      //obscure text if show password or not
+                      obscureText: !showPassword,
+                      decoration: InputDecoration(
+                        labelText: 'Confirm Password',
+                        hintText: 'Passwords must match',
+                        suffixIcon: IconButton(
+                          icon: Icon(showPassword ? Icons.visibility : Icons.visibility_off),
+                          onPressed: toggleConfirmPassword,
+                        ),
+                      ),
+                      validator: (val) {
+                        //make sure there's an entry
+                        if (val == null || val.isEmpty) {
+                          return 'Password is required';
+                        }
+                        //have a regex to make sure input has at least one special character, at least one number and length is > 8
+                        //(?=.*[0-9]) - at least one number
+                        //(?=.*[~!@#$%&*]) - at least one spceial character
+                        //[a-zA-Z0-9~!@#\$%&*] - characters allowed
+                        final regex = RegExp(r'^(?=.*[0-9])(?=.*[~!@#$%&*])[a-zA-Z0-9~!@#\$%&*]{8,}$');
+                        if (!regex.hasMatch(val)) {
+                          return 'Enter a valid password';
+                        }
+                        //check if passwords match
+                        if (val == password) {
+                          return 'Enter a valid password';
+                        }
+                        //valid so return niull
+                        return null;
+                      },
+                      onSaved: (val) => newPasswordConfirm(val!),
                     ),
                     
                   ],
