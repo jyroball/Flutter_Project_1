@@ -86,7 +86,7 @@ class Step2Form  extends StatelessWidget {
                       obscureText: !showPassword,
                       decoration: InputDecoration(
                         labelText: 'Password',
-                        hintText: 'Minumum 8 Characters, 1 Special, 1 Digit',
+                        hintText: '> 8 Characters, 1 Special, 1 Digit',
                         suffixIcon: IconButton(
                           icon: Icon(showPassword ? Icons.visibility : Icons.visibility_off),
                           onPressed: togglePassword,
@@ -110,6 +110,10 @@ class Step2Form  extends StatelessWidget {
                       },
                       onChanged: newPassword,
                     ),
+
+                    //
+                    //  Maybe add a small text here?? since hint too long for input box????
+                    //
 
                     //Output Confirm Password input biox\
                     const SizedBox(height: 16),
