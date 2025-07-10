@@ -55,8 +55,14 @@ class FormThree extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("First Name: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                      Expanded(child: Text(firstName)),
+                      const Expanded(
+                        flex: 1,
+                        child: Text("First Name: ", style: TextStyle(fontWeight: FontWeight.bold))
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text(firstName),
+                      ),
                     ],
                   ),
 
@@ -64,8 +70,14 @@ class FormThree extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Last Name: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                      Expanded(child: Text(lastName)),
+                      const Expanded(
+                        flex: 1,
+                        child: Text("Last Name: ", style: TextStyle(fontWeight: FontWeight.bold))
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text(lastName),
+                      ),
                     ],
                   ),
 
@@ -73,8 +85,14 @@ class FormThree extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Birth Date: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                      Expanded(child: Text(formattedDate)),
+                      const Expanded(
+                        flex: 1,
+                        child: Text("Birth Date: ", style: TextStyle(fontWeight: FontWeight.bold))
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text(formattedDate)
+                      ),
                     ],
                   ),
 
@@ -82,8 +100,14 @@ class FormThree extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Age: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                      Expanded(child: Text(age.toString())),
+                      const Expanded(
+                        flex: 1,
+                        child: Text("Age: ", style: TextStyle(fontWeight: FontWeight.bold))
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text(age.toString())
+                      ),
                     ],
                   ),
 
@@ -91,8 +115,14 @@ class FormThree extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Email: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                      Expanded(child: Text(email)),
+                      const Expanded(
+                        flex: 1,
+                        child: Text("Email: ", style: TextStyle(fontWeight: FontWeight.bold))
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text(email),
+                      ),
                     ],
                   ),
 

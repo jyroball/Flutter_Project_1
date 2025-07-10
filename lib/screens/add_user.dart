@@ -135,7 +135,7 @@ class _AddUserScreenState extends State<AddUserScreen> with SingleTickerProvider
             showConfirmPassword: showConfirmPassword,
             togglePassword: () => setState(() => showPassword = !showPassword),
             toggleConfirmPassword: () => setState(() => showConfirmPassword = !showConfirmPassword),
-            newEmail: (val) => email = val,
+            newEmail: (val) => setState(() => email = val),
             newPassword: (val) => setState(() => password = val),
             newPasswordConfirm: (val) => confirmPassword = val,
             next: _nextTab,
