@@ -87,6 +87,15 @@ class FormThree extends StatelessWidget {
                     ],
                   ),
 
+                  const SizedBox(height: 16),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text("Email: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                      Expanded(child: Text(email)),
+                    ],
+                  ),
+
                   const SizedBox(height: 40),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
