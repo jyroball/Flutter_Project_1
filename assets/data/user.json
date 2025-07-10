@@ -1,0 +1,35 @@
+[
+  {
+    "firstName": "Jyro",
+    "lastName": "Jimenez",
+    "birthDate": "2001-11-24T00:00:00.000",
+    "age": 23,
+    "occupation": "Software Engineer",
+    "bio": "I am a firmware developer from University of California, Riverside. I am currently studying flutter to get better at mobile development and have more experience under my tool box.",
+    "email": "jyrojimenez@gmail.com",
+    "password": "test12345!",
+    "imagePath": "assets/images/profile.jpg"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Jones",
+    "birthDate": "2000-01-01T00:00:00.000",
+    "age": 25,
+    "occupation": "Software Developer",
+    "bio": "I am a Software Developer created to be a random person for a flutter project.",
+    "email": "johndoe@gmail.com",
+    "password": "test12345!",
+    "imagePath": "assets/images/blank.png"
+  },
+  {
+    "firstName": "Bob",
+    "lastName": "Smith",
+    "birthDate": "1990-11-22T00:00:00.000",
+    "age": 33,
+    "occupation": "Product Manager",
+    "bio": "Enjoys organizing teams and building products.",
+    "email": "bob.smith@example.com",
+    "password": "ProdManager#1",
+    "imagePath": "assets/images/blank.png"
+  }
+]
