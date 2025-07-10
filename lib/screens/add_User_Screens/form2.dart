@@ -152,15 +152,32 @@ class Step2Form  extends StatelessWidget {
             ),
 
             //Next Button
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-              child: SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: next,
-                  child: const Text("Next", style: TextStyle(fontSize: 16)),
+            Row(
+              children: [
+                //Back Button
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                    child: ElevatedButton(
+                      onPressed: back,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 154, 147, 147),
+                      ),
+                      child: const Text("Back", style: TextStyle(fontSize: 16)),
+                    ),
+                  ),
                 ),
-              ),
+                //Next Button
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                    child: ElevatedButton(
+                        onPressed: next,
+                        child: const Text("Next", style: TextStyle(fontSize: 16)),
+                    ),
+                  ),
+                ),
+              ]
             ),
           ],
         ),
