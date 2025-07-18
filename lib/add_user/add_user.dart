@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:test1/models/user.dart';
 
 //import different form screens
-import 'package:test1/screens/add_User_Screens/form1.dart';
-import 'package:test1/screens/add_User_Screens/form2.dart';
-import 'package:test1/screens/add_User_Screens/form3.dart';
+import 'package:test1/add_user/add_User_Screens/form1.dart';
+import 'package:test1/add_user/add_User_Screens/form2.dart';
+import 'package:test1/add_user/add_User_Screens/form3.dart';
 
 class AddUserScreen extends StatefulWidget {
   const AddUserScreen({super.key});
