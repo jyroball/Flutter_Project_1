@@ -9,30 +9,6 @@ import '../bloc/add_user_state.dart';
 class FormOne extends StatelessWidget {
   //variables to send back to add_user page
   final GlobalKey<FormState> formKey;
-  // final Function(String) newFirstName;
-  // final Function(String) newLastName;
-  // final DateTime? newBirthdate;
-  // final int newAge;
-  // final Function(DateTime) newBirthDateCall;
-  // final Function(String) newOccuputaion;
-  // final Function(String) newBio;
-
-  //naviagtion variables
-  // final VoidCallback next;
-
-  //passed vars
-  // const FormOne({
-  //   super.key,
-  //   required this.formKey,
-  //   required this.newFirstName,
-  //   required this.newLastName,
-  //   required this.newBirthdate,
-  //   required this.newAge,
-  //   required this.newBirthDateCall,
-  //   required this.newOccuputaion,
-  //   required this.newBio,
-  //   required this.next,
-  // });
 
   const FormOne({super.key, required this.formKey});
 
@@ -73,7 +49,6 @@ class FormOne extends StatelessWidget {
                             hintText: 'John',
                           ),
                           validator: (val) => val == null || val.isEmpty ? 'First Name is required' : null,
-                          //onSaved: (val) => newFirstName(val ?? ''),
                           onChanged: (val) => context.read<UserBloc>().add(UpdateUserField(firstName: val)),
                         ),
                   
@@ -86,7 +61,6 @@ class FormOne extends StatelessWidget {
                             hintText: 'Doe',
                           ),
                           validator: (val) => val == null || val.isEmpty ? 'Last Name is required' : null,
-                          //onSaved: (val) => newLastName(val!),
                           onChanged: (val) => context.read<UserBloc>().add(UpdateUserField(lastName: val)),
                         ),
                         
@@ -142,7 +116,6 @@ class FormOne extends StatelessWidget {
                             hintText: 'Job Title',
                           ),
                           validator: (val) => val == null || val.isEmpty ? 'Occupation is required' : null,
-                          //onSaved: (val) => newOccuputaion(val!),
                           onChanged: (val) => context.read<UserBloc>().add(UpdateUserField(occupation: val)),
                         ),
         
@@ -156,7 +129,6 @@ class FormOne extends StatelessWidget {
                           ),
                           maxLines: 5,
                           validator: (val) => val == null || val.isEmpty ? 'Biography is required' : null,
-                          //onSaved: (val) => newBio(val!),
                           onChanged: (val) => context.read<UserBloc>().add(UpdateUserField(bio: val)),
                         ),
                         
@@ -164,18 +136,6 @@ class FormOne extends StatelessWidget {
                     ),
                   ),
                 ),
-        
-                //Next Button
-                // Padding(
-                //   padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                //   child: SizedBox(
-                //     width: double.infinity,
-                //     child: ElevatedButton(
-                //       onPressed: next,
-                //       child: const Text("Next", style: TextStyle(fontSize: 16)),
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),

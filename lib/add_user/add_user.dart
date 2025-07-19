@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'package:intl/intl.dart';
-//import 'package:test1/models/user.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 //import bloc files
@@ -24,20 +22,6 @@ class _AddUserScreenState extends State<AddUserScreen> with SingleTickerProvider
   //tabcontroller for forms
   late TabController _tabController;
   final _formKeys = [GlobalKey<FormState>(), GlobalKey<FormState>()];
-
-  // //local input for user info
-  // String firstName = '';
-  // String lastName = '';
-  // DateTime birthDate = DateTime.now();
-  // int age = 0;
-  // String occupation = '';
-  // String bio = '';
-  // String email = '';
-  // String password = '';     //since they need a password too
-  // //final String imagePath;     IDK how to implement this for now
-  // String confirmPassword = '';
-  // bool showPassword = false;
-  // bool showConfirmPassword = false;
   
   //Init state then need a dispose state since using controlelr
   @override
@@ -71,43 +55,9 @@ class _AddUserScreenState extends State<AddUserScreen> with SingleTickerProvider
   }
 
   // //submit function
-  // void _submit() {
-  //   final newUser = User(
-  //     firstName: firstName,
-  //     lastName: lastName,
-  //     birthDate: birthDate,
-  //     age: _calculateAge(birthDate),
-  //     occupation: occupation,
-  //     bio: bio,
-  //     email: email,
-  //     password: password,
-  //     imagePath: 'assets/images/blank.png',
-  //   );
-
-  //   //pass values to profile page and add new user
-  //   Navigator.pop(context, newUser);
-  // }
-
-  //
-  //  NEW SUBMIT FUNCTION USING BLOC
-  //
   void _submit(BuildContext context) {
     context.read<UserBloc>().add(const SubmitUser());
   }
-
-  // //calculate age from birthdate
-  // int _calculateAge(DateTime? bday) {
-  //   //no date can't happen, just incase
-  //   if (bday == null) return 0;
-  //   //get today's date and subtract from bday
-  //   final today = DateTime.now();
-  //   int age = today.year - bday.year;
-  //   //edge case with months and day
-  //   if (bday.month > today.month || (bday.month == today.month && bday.day > today.day)) {
-  //     age--;
-  //   }
-  //   return age;
-  // }
 
   //build forms
   @override

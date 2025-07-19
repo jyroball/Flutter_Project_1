@@ -17,39 +17,6 @@ class FormTwo extends StatefulWidget {
 }
 
 class _FormTwoState extends State<FormTwo> {
-  //variables to send back to add_user page
-  // final GlobalKey<FormState> formKey;
-  // final Function(String) newEmail;
-  // final Function(String) newPassword;
-  // final Function(String) newPasswordConfirm;
-
-  //local variabel
-  // final bool showPassword;
-  // final bool showConfirmPassword;
-  // final VoidCallback togglePassword;
-  // final VoidCallback toggleConfirmPassword;
-  // final String password;
-
-  //navigation varioables
-  // final VoidCallback next;
-  // final VoidCallback back;
-
-  //passed avrs
-  // const FormTwo ({
-  //   super.key,
-  //   required this.formKey,
-  //   required this.newEmail,
-  //   required this.newPassword,
-  //   required this.newPasswordConfirm,
-  //   required this.showPassword,
-  //   required this.showConfirmPassword,
-  //   required this.togglePassword,
-  //   required this.toggleConfirmPassword,
-  //   required this.password,
-  //   required this.next,
-  //   required this.back,
-  // });
-
   //local variables to use for pass toggle
   bool showPassword = false;
   bool showConfirmPassword = false;
@@ -89,6 +56,7 @@ class _FormTwoState extends State<FormTwo> {
                             labelText: 'Email Address',
                             hintText: 'john.doe@gmail.com',
                           ),
+
                           //NEED TO VAIDATE FOR AN ACTUAL EMAIL
                           validator: (val) {
                             //make sure there's an entry
@@ -100,12 +68,13 @@ class _FormTwoState extends State<FormTwo> {
                             if (!regex.hasMatch(val)) {
                               return 'Enter a valid email address';
                             }
+
                             //valid so return niull
                             return null;
                           },
+
                           //ALSO ADD EMAIL KEYBOARD TOO
                           keyboardType: TextInputType.emailAddress,
-                          //onSaved: (val) => newEmail(val!),
                           onChanged: (val) => context.read<UserBloc>().add(UpdateUserField(email: val)),
                         ),
                   
@@ -178,42 +147,11 @@ class _FormTwoState extends State<FormTwo> {
                             //valid so return niull
                             return null;
                           },
-                          //onSaved: (val) => newPasswordConfirm(val!),
                         ),
-                        
                       ],
                     ),
                   ),
                 ),
-        
-                // //Next Button
-                // Row(
-                //   children: [
-                //     //Back Button
-                //     Expanded(
-                //       child: Padding(
-                //         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                //         child: ElevatedButton(
-                //           onPressed: back,
-                //           style: ElevatedButton.styleFrom(
-                //             backgroundColor: const Color.fromARGB(255, 154, 147, 147),
-                //           ),
-                //           child: const Text("Back", style: TextStyle(fontSize: 16)),
-                //         ),
-                //       ),
-                //     ),
-                //     //Next Button
-                //     Expanded(
-                //       child: Padding(
-                //         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                //         child: ElevatedButton(
-                //             onPressed: next,
-                //             child: const Text("Next", style: TextStyle(fontSize: 16)),
-                //         ),
-                //       ),
-                //     ),
-                //   ]
-                // ),
               ],
             ),
           ),

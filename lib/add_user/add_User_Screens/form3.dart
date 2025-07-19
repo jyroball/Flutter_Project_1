@@ -4,41 +4,12 @@ import 'package:intl/intl.dart';
 
 //bloc imports
 import '../bloc/add_user_bloc.dart';
-//import '../bloc/add_user_event.dart';
 import '../bloc/add_user_state.dart';
 
 final formatter = DateFormat.yMd();
 
 class FormThree extends StatelessWidget {
-  // final String firstName;
-  // final String lastName;
-  // final DateTime birthDate;
-  // final int age;
-  // final String occupation;
-  // final String bio;
-  // final String email;
-  // final VoidCallback back;
-  // final VoidCallback submit;
-
-  // const FormThree({
-  //   super.key,
-  //   required this.firstName,
-  //   required this.lastName,
-  //   required this.birthDate,
-  //   required this.age,
-  //   required this.occupation,
-  //   required this.bio,
-  //   required this.email,
-  //   required this.back,
-  //   required this.submit,
-  // });
-
   const FormThree({super.key});
-
-  //Helper function to output foratted date
-  // String get formattedDate {
-  //   return formatter.format(user.birthDate);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -155,35 +126,6 @@ class FormThree extends StatelessWidget {
                   ),
                 ),
               ),
-        
-              // //Next Button
-              // Row(
-              //   children: [
-              //     //Back Button
-              //     Expanded(
-              //       child: Padding(
-              //         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-              //         child: ElevatedButton(
-              //           onPressed: back,
-              //           style: ElevatedButton.styleFrom(
-              //             backgroundColor: const Color.fromARGB(255, 154, 147, 147),
-              //           ),
-              //           child: const Text("Back", style: TextStyle(fontSize: 16)),
-              //         ),
-              //       ),
-              //     ),
-              //     //Next Button
-              //     Expanded(
-              //       child: Padding(
-              //         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-              //         child: ElevatedButton(
-              //             onPressed: submit,
-              //             child: const Text("Continue", style: TextStyle(fontSize: 16)),
-              //         ),
-              //       ),
-              //     ),
-              //   ]
-              // ),
             ],
           ),
         );
