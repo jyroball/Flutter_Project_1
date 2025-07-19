@@ -3,12 +3,15 @@
 //import 'package:uuid/uuid.dart';
 import 'package:intl/intl.dart';
 
+//add equitable for later use
+import 'package:equatable/equatable.dart';
+
 final formatter = DateFormat.yMd();
 
 //utility object to generate a unique id
 //const uuid = Uuid();
 
-class User {
+class User extends Equatable{
   final String firstName;
   final String lastName;
   final DateTime birthDate;
@@ -19,7 +22,7 @@ class User {
   final String password;    //Store this here for now, definetly need another model for user authentication
   final String imagePath;
 
-  User({
+  const User({
     required this.firstName,
     required this.lastName,
     required this.birthDate,
@@ -30,6 +33,20 @@ class User {
     required this.password,
     required this.imagePath,    //Might hardcode path for now
   });
+
+  //for equitable
+  @override
+  List<Object?> get props => [
+    firstName,
+    lastName,
+    birthDate,
+    age,
+    occupation,
+    bio,
+    email,
+    password,
+    imagePath,
+  ];
 
   String get formattedDate {
     return formatter.format(birthDate);
@@ -60,6 +77,31 @@ class User {
       email: json['email'],
       password: json['password'],
       imagePath: json['imagePath'],
+    );
+  }
+
+  //copy function for bloc
+  User copyWith({
+    String? firstName,
+    String? lastName,
+    DateTime? birthDate,
+    int? age,
+    String? occupation,
+    String? bio,
+    String? email,
+    String? password,
+    String? imagePath,
+  }) {
+    return User(
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      birthDate: birthDate ?? this.birthDate,
+      age: age ?? this.age,
+      occupation: occupation ?? this.occupation,
+      bio: bio ?? this.bio,
+      email: email ?? this.email,
+      password: password ?? this.password,
+      imagePath: imagePath ?? this.imagePath,
     );
   }
 }
