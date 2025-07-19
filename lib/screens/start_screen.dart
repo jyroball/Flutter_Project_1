@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class StartScreen extends StatelessWidget {
-  const StartScreen(this.next, {super.key}); //pass a void function from quiz.dart
+  const StartScreen(this.next, {super.key});
 
   final void Function() next;
 

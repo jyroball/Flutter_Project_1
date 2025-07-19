@@ -4,7 +4,7 @@ import 'package:test1/models/user.dart';
 
 class BioScreen extends StatelessWidget {
   //we start using navigator to change screens instead of just changing screens
-  const BioScreen({required this.user, super.key}); //pass a void function from quiz.dart
+  const BioScreen({required this.user, super.key});
   final User user;
 
   @override
