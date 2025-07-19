@@ -25,7 +25,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       age: event.birthDate != null ? _calculateAge(event.birthDate!) : state.user.age,
     );
 
-    emit(state.copyWith(user: updatedUser));
+    emit(state.copyWith(user: updatedUser, chooseBday: event.birthDate != null ? true : state.chooseBday,));
   }
 
   void _onNextStep(NextStep event, Emitter<UserState> emit) {

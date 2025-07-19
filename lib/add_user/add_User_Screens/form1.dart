@@ -42,6 +42,7 @@ class FormOne extends StatelessWidget {
       builder: (context, state) {
         final user = state.user;
         final currentStep = state.currentStep + 1;
+        final chooseBday = state.chooseBday;
 
         return Form(
           key: formKey,
@@ -99,7 +100,7 @@ class FormOne extends StatelessWidget {
                                 readOnly: true,
                                 decoration: const InputDecoration(labelText: 'Birthdate'),
                                 controller: TextEditingController(
-                                  text: user.birthDate != null
+                                  text: chooseBday == true
                                       ? '${user.birthDate.month.toString().padLeft(2, '0')}/${user.birthDate.day.toString().padLeft(2, '0')}/${user.birthDate.year}'
                                       : '',
                                 ),
@@ -115,7 +116,7 @@ class FormOne extends StatelessWidget {
                                     context.read<UserBloc>().add(UpdateUserField(birthDate: picked));
                                   }
                                 },
-                                validator: (_) => user.birthDate == null ? 'Birthdate is required' : null,
+                                validator: (_) => chooseBday == false ? 'Birthdate is required' : null,
                               ),
                             ),
         
@@ -126,7 +127,7 @@ class FormOne extends StatelessWidget {
                               child: TextFormField(
                                 readOnly: true,
                                 decoration: const InputDecoration(labelText: 'Age'),
-                                controller: TextEditingController(text: user.age.toString()),
+                                controller: TextEditingController(text: chooseBday == true ? user.age.toString() : ''),
                               ),
                             ),
                           ],

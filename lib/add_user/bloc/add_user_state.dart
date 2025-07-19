@@ -7,6 +7,7 @@ class UserState extends Equatable {
   final int currentStep;
   final bool isSubmitting;
   final bool isSubmissionSuccess;
+  final bool chooseBday;          //for outputing birthdate
   final String? error;
 
   const UserState({
@@ -14,6 +15,7 @@ class UserState extends Equatable {
     this.currentStep = 0,
     this.isSubmitting = false,
     this.isSubmissionSuccess = false,
+    this.chooseBday = false,
     this.error,
   });
 
@@ -34,6 +36,7 @@ class UserState extends Equatable {
       currentStep: 0,
       isSubmitting: false,
       isSubmissionSuccess: false,
+      chooseBday: false,
       error: null,
     );
   }
@@ -43,6 +46,7 @@ class UserState extends Equatable {
     int? currentStep,
     bool? isSubmitting,
     bool? isSubmissionSuccess,
+    bool? chooseBday,
     String? error,
   }) {
     return UserState(
@@ -50,10 +54,11 @@ class UserState extends Equatable {
       currentStep: currentStep ?? this.currentStep,
       isSubmitting: isSubmitting ?? this.isSubmitting,
       isSubmissionSuccess: isSubmissionSuccess ?? this.isSubmissionSuccess,
+      chooseBday: chooseBday ?? this.chooseBday,
       error: error,
     );
   }
 
   @override
-  List<Object?> get props => [user, currentStep, isSubmitting, isSubmissionSuccess, error];
+  List<Object?> get props => [user, currentStep, isSubmitting, isSubmissionSuccess, chooseBday, error];
 }
