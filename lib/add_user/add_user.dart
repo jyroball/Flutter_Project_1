@@ -119,7 +119,7 @@ class _AddUserScreenState extends State<AddUserScreen> with SingleTickerProvider
         automaticallyImplyLeading: false,
       ),
       body: BlocConsumer<UserBloc, UserState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           //make sure tabbarview is on the same page as bloc state
           if (_tabController.index != state.currentStep) {
             _tabController.animateTo(state.currentStep);
@@ -127,16 +127,32 @@ class _AddUserScreenState extends State<AddUserScreen> with SingleTickerProvider
 
           //go through this once submission done properly
           if (state.isSubmissionSuccess) {
-            //send message user added
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('User successfully added!')),
+            //send message user added with ok button
+            final shouldPop = await showDialog<bool>(
+              context: context,
+              barrierDismissible: false,
+              builder: (context) {
+                return AlertDialog(
+                  title: const Text('Success', style: TextStyle(fontWeight: FontWeight.bold)),
+                  content: const Text('User successfully added!'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(true),
+                      child: const Text('OK'),
+                    ),
+                  ],
+                );
+              },
             );
 
-            //send data
-            Navigator.pop(context, state.user);
+            //only pop and send when ok button pressed for dialogue
+            if (shouldPop == true && mounted) {
+              //send data
+              Navigator.pop(context, state.user);
 
-            //reset bloc data so data doesn't show up again if we add a new user
-            context.read<UserBloc>().add(const ResetForm());
+              //reset bloc data so data doesn't show up again if we add a new user
+              context.read<UserBloc>().add(const ResetForm());
+            }
           }
         },
 
