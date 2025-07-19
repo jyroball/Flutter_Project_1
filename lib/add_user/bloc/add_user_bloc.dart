@@ -45,6 +45,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     await Future.delayed(const Duration(seconds: 1));
     emit(state.copyWith(isSubmitting: false, isSubmissionSuccess: true));
 
+    //reset form on submit since we dont want old user info when adding new user
     on<ResetForm>((event, emit) {
       emit(UserState.initial());
     });
