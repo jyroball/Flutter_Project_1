@@ -14,7 +14,7 @@ import 'package:test1/widgets/user_card.dart';
 //import 'package:intl/intl.dart';
 
 //Import Form pages
-import 'package:test1/screens/add_user.dart';
+import 'package:test1/add_user/add_user.dart';
 
 //Import for File I/O
 import 'dart:convert';
@@ -64,6 +64,9 @@ class _ProfileState extends State<Profile> {
   //Can be changed to read off a DB later like Firebase or AZuare
   @override
   void initState() {
+    //REST NEED TO REMOVE LATER ONLY FOR DEBUGGING PURPOSES
+    _resetUserJSONToAssetDefault();
+
     //Read Users here from JSON File
     _loadItems();
     super.initState();
@@ -104,6 +107,22 @@ class _ProfileState extends State<Profile> {
 
     //Upload data into json
     await file.writeAsString(jsonEncode(userList));
+  }
+
+  //
+  //  FUNCTION TO RESET JSON FILE FOR DEBUGGING (List was filling up as I debug)
+  //
+  void _resetUserJSONToAssetDefault() async {
+    final dir = await getApplicationDocumentsDirectory();
+    final file = File('${dir.path}/user.json');
+
+    final assetData = await rootBundle.loadString('assets/data/user.json');
+    await file.writeAsString(assetData);
+
+    final List<dynamic> jsonList = jsonDecode(assetData);
+    setState(() {
+      users = jsonList.map((e) => User.fromJson(e)).toList();
+    });
   }
 
   //Using user card button view profile
