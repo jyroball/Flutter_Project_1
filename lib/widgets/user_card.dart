@@ -1,10 +1,10 @@
-import 'package:test1/models/user.dart';
+import 'package:test1/models/user_entity.dart';
 import 'package:flutter/material.dart';
 
 class UserCard extends StatelessWidget {
   const UserCard({super.key, required this.goBio, required this.user});
 
-  final User user;
+  final UserEntity user;
   final VoidCallback goBio;
 
   @override
@@ -25,15 +25,16 @@ class UserCard extends StatelessWidget {
               width: 4,
             ),
           ),
-          child: CircleAvatar(
+          child: const CircleAvatar(
             radius: 30,
-            backgroundImage: AssetImage(user.imagePath),
+            backgroundImage: AssetImage('assets/images/blank.png'),
           ),
         ),
         //name
         title: Text('${user.firstName} ${user.lastName}'),
         //occupation
-        subtitle: Text(user.occupation),
+        //subtitle: Text(user.occupation),
+        subtitle: Text(user.email),
         //button to view bio
         trailing: IconButton(
           icon: const Icon(Icons.remove_red_eye),

@@ -1,8 +1,15 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test1/api_services/api_client.dart';
 import 'add_user_event.dart';
 import 'add_user_state.dart';
 
+import 'package:dio/dio.dart';
+import 'package:test1/api_services/api_retrofit.dart';
+
 class UserBloc extends Bloc<UserEvent, UserState> {
+  //api
+  final UserApiService api = UserApiService(ApiClient.dio);
+
   UserBloc() : super(UserState.initial()) {
     on<UpdateUserField>(_onUpdateUserField);
     on<SubmitUser>(_onSubmitUser);
@@ -11,6 +18,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<ResetForm>((event, emit) {
       emit(UserState.initial());
     });
+    on<SubmitUserRequested>(_onSubmitUserRequested);
   }
 
   void _onUpdateUserField(UpdateUserField event, Emitter<UserState> emit) {
@@ -20,7 +28,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       email: event.email,
       password: event.password,
       birthDate: event.birthDate,
-      occupation: event.occupation,
       bio: event.bio,
       age: event.birthDate != null ? _calculateAge(event.birthDate!) : state.user.age,
     );
@@ -41,14 +48,69 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 
   Future<void> _onSubmitUser(SubmitUser event, Emitter<UserState> emit) async {
-    emit(state.copyWith(isSubmitting: true));
-    await Future.delayed(const Duration(seconds: 1));
-    emit(state.copyWith(isSubmitting: false, isSubmissionSuccess: true));
+    emit(state.copyWith(isSubmitting: true, showRetryDialog: false, errorMessage: null));
 
-    //reset form on submit since we dont want old user info when adding new user
-    on<ResetForm>((event, emit) {
-      emit(UserState.initial());
-    });
+    try {
+      final res = await api.registerUser(state.user);
+      String msg = 'User registered successfully!';
+      if (res is Map && res['message'] is String) {
+        msg = res['message'] as String;
+      }
+
+      emit(state.copyWith(
+        isSubmitting: false,
+        isSubmissionSuccess: true,
+        serverMessage: msg,
+      ));
+    } 
+    on DioException catch (e) {
+      emit(state.copyWith(
+        isSubmitting: false,
+        showRetryDialog: true,
+        errorMessage: _dioToMessage(e),
+      ));
+    } 
+    catch (e) {
+      emit(state.copyWith(
+        isSubmitting: false,
+        showRetryDialog: true,
+        errorMessage: e.toString(),
+      ));
+    }
+  }
+
+  Future<void> _onSubmitUserRequested(SubmitUserRequested event, Emitter<UserState> emit) async {
+    emit(state.copyWith(isSubmitting: true, showRetryDialog: false, errorMessage: null));
+
+    try {
+      await api.triggerError();
+      emit(state.copyWith(
+        isSubmitting: false,
+        showRetryDialog: true,
+        errorMessage: 'Unexpected: error endpoint did not fail.',
+      ));
+    } 
+    on DioException catch (e) {
+      emit(state.copyWith(
+        isSubmitting: false,
+        showRetryDialog: true,
+        errorMessage: e.response?.data?.toString() ?? e.message ?? 'Unknown error',
+      ));
+    } 
+    catch (e) {
+      emit(state.copyWith(
+        isSubmitting: false,
+        showRetryDialog: true,
+        errorMessage: e.toString(),
+      ));
+    }
+  }
+
+  String _dioToMessage(DioException e) {
+    final data = e.response?.data;
+    if (data is String) return data;
+    if (data is Map && data['message'] is String) return data['message'] as String;
+    return e.message ?? 'Unknown network error';
   }
 
   int _calculateAge(DateTime birthDate) {

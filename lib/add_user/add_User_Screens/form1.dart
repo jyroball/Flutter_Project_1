@@ -17,7 +17,6 @@ class FormOne extends StatelessWidget {
     return BlocBuilder<UserBloc, UserState>(
       builder: (context, state) {
         final user = state.user;
-        final currentStep = state.currentStep + 1;
         final chooseBday = state.chooseBday;
 
         return Form(
@@ -34,7 +33,6 @@ class FormOne extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         //Output instructions at the top
-                        Text("${currentStep} out of 3", style: const TextStyle(color: Colors.grey)),
                         const SizedBox(height: 8),
                         const Text("Personal Information", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                         const Text("Input your personal information. All fields are required.",
@@ -75,7 +73,7 @@ class FormOne extends StatelessWidget {
                                 decoration: const InputDecoration(labelText: 'Birthdate'),
                                 controller: TextEditingController(
                                   text: chooseBday == true
-                                      ? '${user.birthDate.month.toString().padLeft(2, '0')}/${user.birthDate.day.toString().padLeft(2, '0')}/${user.birthDate.year}'
+                                      ? '${user.birthdate.month.toString().padLeft(2, '0')}/${user.birthdate.day.toString().padLeft(2, '0')}/${user.birthdate.year}'
                                       : '',
                                 ),
                                 //show calendar to pick date
@@ -107,17 +105,17 @@ class FormOne extends StatelessWidget {
                           ],
                         ),
         
-                        //Output Occupation Input
-                        const SizedBox(height: 12),
-                        TextFormField(
-                          initialValue: user.occupation,
-                          decoration: const InputDecoration(
-                            labelText: 'Occupation',
-                            hintText: 'Job Title',
-                          ),
-                          validator: (val) => val == null || val.isEmpty ? 'Occupation is required' : null,
-                          onChanged: (val) => context.read<UserBloc>().add(UpdateUserField(occupation: val)),
-                        ),
+                        // //Output Occupation Input
+                        // const SizedBox(height: 12),
+                        // TextFormField(
+                        //   initialValue: user.occupation,
+                        //   decoration: const InputDecoration(
+                        //     labelText: 'Occupation',
+                        //     hintText: 'Job Title',
+                        //   ),
+                        //   validator: (val) => val == null || val.isEmpty ? 'Occupation is required' : null,
+                        //   onChanged: (val) => context.read<UserBloc>().add(UpdateUserField(occupation: val)),
+                        // ),
         
                         //Output Bio Input
                         const SizedBox(height: 12),

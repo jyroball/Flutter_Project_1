@@ -14,8 +14,8 @@ class UpdateUserField extends UserEvent {
   final String? email;
   final String? password;
   final DateTime? birthDate;
-  final String? occupation;
   final String? bio;
+  final String? errorMessage;
 
   const UpdateUserField({
     this.firstName,
@@ -23,8 +23,8 @@ class UpdateUserField extends UserEvent {
     this.email,
     this.password,
     this.birthDate,
-    this.occupation,
     this.bio,
+    this.errorMessage,
   });
 
   @override
@@ -34,7 +34,6 @@ class UpdateUserField extends UserEvent {
         email,
         password,
         birthDate,
-        occupation,
         bio,
       ];
 }
@@ -53,4 +52,8 @@ class SubmitUser extends UserEvent {
 //reset form after submitting so bloc state resets for new add user.
 class ResetForm extends UserEvent {
   const ResetForm();
+}
+
+class SubmitUserRequested extends UserEvent {
+  const SubmitUserRequested();
 }

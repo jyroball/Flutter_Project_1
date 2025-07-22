@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 //import model
-import 'package:test1/models/user.dart';
+import 'package:test1/models/user_entity.dart';
 
 class BioScreen extends StatelessWidget {
   //we start using navigator to change screens instead of just changing screens
   const BioScreen({required this.user, super.key});
-  final User user;
+  final UserEntity user;
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +31,9 @@ class BioScreen extends StatelessWidget {
                         width: 4,
                       ),
                     ),
-                    child: CircleAvatar(
+                    child: const CircleAvatar(
                       radius: 30,
-                      backgroundImage: AssetImage(user.imagePath),
+                      backgroundImage: AssetImage('assets/images/blank.png'),
                     ),
                   ),
 
@@ -46,7 +46,7 @@ class BioScreen extends StatelessWidget {
                       //first then last name
                       Text('${user.firstName} ${user.lastName}', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
                       //occupation below name
-                      Text(user.occupation, style: const TextStyle(fontSize: 16)),
+                      //Text(user.occupation, style: const TextStyle(fontSize: 16)),
                     ],
                   ),
                 ],
