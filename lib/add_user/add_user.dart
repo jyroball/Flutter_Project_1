@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+//import model
+import 'package:test1/models/user_entity.dart';
+
 //import bloc files
 import 'bloc/add_user_bloc.dart';
 import 'bloc/add_user_event.dart';
@@ -22,6 +25,7 @@ class _AddUserScreenState extends State<AddUserScreen> with SingleTickerProvider
   //tabcontroller for forms
   late TabController _tabController;
   final _formKeys = [GlobalKey<FormState>(), GlobalKey<FormState>()];
+  bool _loaderShown = false;
   
   //Init state then need a dispose state since using controlelr
   @override
@@ -54,11 +58,76 @@ class _AddUserScreenState extends State<AddUserScreen> with SingleTickerProvider
     context.read<UserBloc>().add(PreviousStep());
   }
 
-  // //submit function
+  //submit function
   void _submit(BuildContext context) {
-    context.read<UserBloc>().add(const SubmitUser());
+    context.read<UserBloc>().add(const SubmitUserRequested());
   }
 
+  //loader
+  Future<void> _showLoader(BuildContext context) async {
+    if (_loaderShown) return;
+    _loaderShown = true;
+    await showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => const Center(child: CircularProgressIndicator()),
+    );
+    _loaderShown = false;
+  }
+
+  void _hideLoaderIfOpen(BuildContext context) {
+    if (_loaderShown) {
+      Navigator.of(context, rootNavigator: true).pop();
+      _loaderShown = false;
+    }
+  }
+
+  //widget for retyr
+  Future<void> _showRetryDialog(BuildContext context, String message) async {
+    await showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => AlertDialog(
+        title: const Text('Error'),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              context.read<UserBloc>().add(const SubmitUser());
+            },
+            child: const Text('Retry'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  //function for succes
+  Future<void> _showSuccessDialogAndPop(BuildContext context, String message, UserEntity user) async {
+    await showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (dialogCtx) => AlertDialog(
+        title: const Text('Success', style: TextStyle(fontWeight: FontWeight.bold)),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(dialogCtx).pop();
+              Navigator.of(context).pop(user);
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+  
   //build forms
   @override
   Widget build(BuildContext context) {
@@ -68,6 +137,7 @@ class _AddUserScreenState extends State<AddUserScreen> with SingleTickerProvider
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
+
       body: BlocConsumer<UserBloc, UserState>(
         listener: (context, state) async {
           //make sure tabbarview is on the same page as bloc state
@@ -75,46 +145,57 @@ class _AddUserScreenState extends State<AddUserScreen> with SingleTickerProvider
             _tabController.animateTo(state.currentStep);
           }
 
-          //go through this once submission done properly
+          //Load Icon
+          if (state.isSubmitting) {
+            await _showLoader(context);
+          } else {
+            _hideLoaderIfOpen(context);
+          }
+
+          //Retry, mock error thingy maboib
+          if (state.showRetryDialog && !state.isSubmitting) {
+            await _showRetryDialog(context, state.errorMessage ?? 'Something went wrong. Please try again.');
+          }
+
+          //Success so push registration
           if (state.isSubmissionSuccess) {
-            //send message user added with ok button
-            final shouldPop = await showDialog<bool>(
-              context: context,
-              barrierDismissible: false,
-              builder: (context) {
-                return AlertDialog(
-                  title: const Text('Success', style: TextStyle(fontWeight: FontWeight.bold)),
-                  content: const Text('User successfully added!'),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.of(context).pop(true),
-                      child: const Text('OK'),
-                    ),
-                  ],
-                );
-              },
-            );
-
-            //only pop and send when ok button pressed for dialogue
-            if (shouldPop == true && mounted) {
-              //send data
-              Navigator.pop(context, state.user);
-
-              //reset bloc data so data doesn't show up again if we add a new user
+            await _showSuccessDialogAndPop(context, state.serverMessage ?? 'User registered successfully!', state.user,);
+            if (mounted) {
               context.read<UserBloc>().add(const ResetForm());
             }
           }
+
         },
 
         //build all three form screens
         builder: (context, state) {
-          return TabBarView(
-            controller: _tabController,
-            physics: const NeverScrollableScrollPhysics(),
+          return Column(
             children: [
-              FormOne(formKey: _formKeys[0]),
-              FormTwo(formKey: _formKeys[1]),
-              const FormThree(),
+              //Step number for form
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12.0),
+                child: Text(
+                  "${state.currentStep + 1} out of 3",
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+
+              //Form builder
+              Expanded(
+                child: TabBarView(
+                  controller: _tabController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    FormOne(formKey: _formKeys[0]),
+                    FormTwo(formKey: _formKeys[1]),
+                    const FormThree(),
+                  ],
+                ),
+              ),
             ],
           );
         },
@@ -151,7 +232,7 @@ class _AddUserScreenState extends State<AddUserScreen> with SingleTickerProvider
                           _submit(context);
                         }
                       },
-                      child: Text(state.currentStep < 2 ? 'Next' : 'Submit'),
+                      child: Text(state.currentStep < 2 ? 'Review' : 'Continue'),
                     ),
                   ),
                 ],

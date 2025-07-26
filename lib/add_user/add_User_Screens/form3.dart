@@ -16,10 +16,9 @@ class FormThree extends StatelessWidget {
     return BlocBuilder<UserBloc, UserState>(
       builder: (context, state) {
         final user = state.user;
-        final currentStep = state.currentStep + 1;
 
         //use this instead since user can't be accessed by helper function
-        String formattedDate = formatter.format(user.birthDate);
+        String formattedDate = formatter.format(user.birthdate);
 
         return SafeArea(
           child: Column(
@@ -31,7 +30,6 @@ class FormThree extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       //Output instructions at the top
-                      Text("${currentStep} out of 3", style: const TextStyle(color: Colors.grey)),
                       const SizedBox(height: 8),
                       const Text("Review Information", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                       const Text("Please review all of your information before you continue.", style: TextStyle(color: Colors.grey)),

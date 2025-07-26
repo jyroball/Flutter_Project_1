@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 //Import other pages
-import 'package:test1/screens/profile.dart';
 import 'add_user/bloc/add_user_bloc.dart';
+import 'package:test1/screens/home_screen.dart';
+import 'user_list/bloc/user_list_bloc.dart';
+import 'user_list/bloc/user_list_event.dart';
 
 void main() {
   runApp(
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => UserBloc()),
+        BlocProvider(create: (_) => UserListBloc()..add(FetchUsers())),
       ],
       child: MaterialApp(
         //Light theme
@@ -67,7 +70,7 @@ void main() {
         themeMode: ThemeMode.system,
       
         //Application
-        home: const Profile()
+        home: const HomeScreen()
       ),
     ),
   );

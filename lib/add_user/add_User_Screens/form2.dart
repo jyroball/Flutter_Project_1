@@ -26,7 +26,6 @@ class _FormTwoState extends State<FormTwo> {
     return BlocBuilder<UserBloc, UserState>(
       builder: (context, state) {
         final user = state.user;
-        final currentStep = state.currentStep + 1;
 
         return Form(
           key: widget.formKey,
@@ -42,7 +41,6 @@ class _FormTwoState extends State<FormTwo> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         //Output instructions at the top
-                        Text("${currentStep} out of 3", style: const TextStyle(color: Colors.grey)),
                         const SizedBox(height: 8),
                         const Text("Email & Password", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                         const Text("Enter Login Information...",
